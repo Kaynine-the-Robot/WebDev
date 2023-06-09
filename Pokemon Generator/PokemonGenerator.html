@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Generator</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #FFFFFA;">
+    <!-- Button to generate Everythin -->
+    <!-- divs for things you want to display -->
+    <div style="height: 20%; padding: 20px; background-color: rgb(208, 206, 206);">
+        <img style="width: 10%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png">
+        <h1 style="display: inline-block">Generator</h1>
+        <div class="image">
+            <img id="picture" src="" alt="">
+        </div>
+        <div id="name"></div>
+        <div id="type"></div>
+        <div id="number"></div>
+        <div id="moves"></div>
+    </div>
+    <button style="margin: 20px; height: 40px" id="generate">Generate New Pokemon</button>
+
+    <script>
+        //Set loading Text
+        let pic = document.getElementById("picture");
+        let nameText = document.getElementById("name");
+        let typeText = document.getElementById("type");
+        let number = document.getElementById("number");
+        let movesText =  document.getElementById("moves");
+        // Fetch from Pokemon API, random pokemon
+        const generate = () => {
+            // Set loading names
+            // pic.src = "Loading...";
+            nameText.innerText = "Loading...";
+            typeText.innerText = "Loading...";
+            number.innerText = "Loading...";
+            movesText.innerText =  "Loading...";
+            console.log("Loading")
+
+            const rand = Math.ceil(Math.random() * 500);
+            const pick = "https://pokeapi.co/api/v2/pokemon/" + rand // Default to string
+            console.log("Got random pokemon")
+            fetch(pick) 
+                .then(response => response.json())
+                .then(data => {
+                    //Set Picture
+                    pic.src = data.sprites.front_default;
+                    // Set Name
+                    nameText.innerText = `Name: ${data.name}`;
+                    // Set the Types
+                    const types = data.types;
+                    let typesString = "";
+                    types.forEach(element => {
+                        typesString += element.type.name + ", ";                      
+                    });
+                    typeText.innerText = `Types: ${typesString.slice(0,-2)}`;
+                    // Set the number/id
+                    number.innerText = `Number/ID: ${data.id}`;
+                    // Set the Moves
+                    const moves = data.moves;
+                    let movesString = "";
+                    moves.forEach(element => {
+                        movesString += element.move.name + ", ";                      
+                    });
+                    movesText.innerText = `Moves: ${movesString.slice(0,-2)}`;
+                })
+            console.log("Finished Generation")
+        }
+        
+
+        // Event Listener for click
+        document.getElementById("generate").addEventListener("click", generate)
+        //Query Selectors
+        //const elems = document.querySelectorAll(".this-class");
+    </script>
+    
+</body>
+</html>
