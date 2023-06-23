@@ -1,0 +1,27 @@
+{
+  "name": "chat-example",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0",
+    "socket.io-cookie": "0.0.1",
+    "tailwind": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Dynamis Development",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alligatorio/Chat-Example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alligatorio/Chat-Example/issues"
+  },
+  "homepage": "https://github.com/alligatorio/Chat-Example#readme",
+  "description": ""
+}
